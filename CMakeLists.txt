@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.12)
 
-include(../../Configurations.cmake)
+include(Configurations.cmake)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     set(COMMON_EMSCRIPTEN_PARAMETERS "-s NO_EXIT_RUNTIME=1 -s TOTAL_MEMORY=134217728 -s NO_FILESYSTEM=1 -s EXPORTED_RUNTIME_METHODS=\"['UTF8ToString', 'HEAPF32', '_free', '_malloc', 'HEAPU8']\" -s EXPORTED_FUNCTIONS=\"['UTF8ToString', 'HEAPF32', '_free', '_malloc', 'HEAPU8']\"")
@@ -13,11 +13,11 @@ endif()
 
 project(MusicSynthesizer)
 
-include_directories(../../Intra)
+include_directories(src)
 
 file(GLOB_RECURSE MUSIC_SYNTH_HEADERS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" *.h)
 file(GLOB_RECURSE MUSIC_SYNTH_SOURCES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" *.cpp)
 
-add_executable(MusicSynthesizer ${MUSIC_SYNTH_HEADERS} ${MUSIC_SYNTH_SOURCES})
+add_executable(IntraSynth ${MUSIC_SYNTH_HEADERS} ${MUSIC_SYNTH_SOURCES})
 
-target_link_libraries(MusicSynthesizer Intra)
+target_link_libraries(IntraSynth Intra)
